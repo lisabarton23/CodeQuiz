@@ -62,6 +62,7 @@ var index=0;
 //2. create a displaycard() fx ..
   //display the quest, choices, ans
   function displaycard(){
+
     document.getElementById("startContent").style.display = "none";
     document.getElementById("highscoreContent").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
@@ -77,19 +78,19 @@ var index=0;
      btn.setAttribute("id","userOption");
      btn.setAttribute("data-val",quizQuestions[index].choices[choiceoption]);
      document.querySelector("#choiceArea").appendChild(btn); 
-     btn.addEventListener ("click", function () {if  (quizQuestions[index].answer === btn) displaycard (quizQuestions [index++].question);},
+     
      //try adding event.target
     //  else { timeElement--}
     //   // 
        
     //     document.getElementById("question").textContent= (quizQuestions[1].question)
+     btn.addEventListener ("click", (quizQuestions [1]))
+    // if  {(quizQuestions[index].answer === btn) displaycard (quizQuestions [index++].question);}
+     
 
-     )
-
-      
+    }
   }
-      
-  }//TODO: score can be seconds left 
+  
     
     //display ans
 // console.log (quizQuestions[index].answer)
