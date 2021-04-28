@@ -130,36 +130,11 @@ var index=0;
 
 
 
-  //when the user onclick the startbtn then we call the displaycard() to play the game
-  // startQuiz.addEventListener ("click", displaycard);
-
+  
 //function needs to go through each questions one at a ti
 // with only correct answers advancing to the next questions,
 //also the timer needs to be counting down with more extra 5 
-//seconds taken off if question is answered wrong
-
-// function quizGo () { 
-    
-//     // alert ("hello");
-    
-//     var timer = setInterval(function() { 
-//     secondsLeft--;
-//     //  timeElement.textContent = secondsLeft + quizQuestions;??
-
-//       if(secondsLeft === 0) {
-      
-//         clearInterval(timerInterval);
-//       //create a results box and highscore initals box, option to restart
-//        ;
-//      };
-
-//    }, 2000);
-// }
-
-// startQuiz.addEventListener ("click", (quizGo)); 
-
-
-//then sart button needs to disapper until quiz is finished//
+//seconds taken off if choice != answer
 
 
 
