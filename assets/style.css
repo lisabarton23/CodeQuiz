@@ -1,2 +1,16 @@
 *
-{background-color: aqua;}
+{background-color: rgb(198, 212, 206);
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+color: rgb(14, 77, 14);
+}
+
+#startButton { background-color: rgb(14, 77, 14); color: blanchedalmond; font-size: larger;
+
+padding: 10;
+margin: auto;
+
+
+}
+
+
+

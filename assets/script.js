@@ -1,13 +1,10 @@
-var timeElement = document.querySelector("time");
+var timeElement = document.getElementById("time");
 var questionElement = document.querySelector ("quiz");
-var secondsLeft = 20;
+var secondsLeft = 50;
 var startQuiz = document.getElementById ("startButton");
 var submitAnswer = document.getElementById ("submitButton");
 var results = document.getElementById ("answer");
 
-//A. trivia game 
-//B. TODO: add time
-//C. TODO: add local storage for high score and user to input initals
 
 var index=0;
 
@@ -45,33 +42,59 @@ var index=0;
       answer: "()"
     },
   ];
+  startQuiz.addEventListener ("click",function () {
+    event.preventDefault;
+    displaycard ();
+    setTimer ()
+    
 
+
+  });
 //display what needs to go when we start the game
 //display a startbtn
 //display instructions 
 //display  a title
   function start(){
+  
+    
     document.getElementById("displayConent").style.display = "none";
     document.getElementById("highscoreContent").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
+    
 
-  }
+
+    }
+
+    //startQuiz.addEventListener ("click");
+ 
   //https://www.w3schools.com/jsref/prop_style_display.asp
   
 //1. create your array of obj
 //2. create a displaycard() fx ..
-  //display the quest, choices, ans
+  //display the quest, choice
+  function setTimer () {
+    var timerInterval = setInterval(function () {
+      secondsLeft--;
+      timeElement.textContent = secondsLeft + " seconds left!";
+    
+      if (secondsLeft === 0) {
+         clearInterval (timerInterval);
+      //add final score info
+      }
+    
+    }, 1000);
+    
+  
+      }
+  
   function displaycard(){
 
     document.getElementById("startContent").style.display = "none";
     document.getElementById("highscoreContent").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
     document.getElementById("displayConent").style.display = "block";
-
-    //display questions
     document.getElementById("question").textContent= (quizQuestions[index].question);
-    // console.log(quizQuestions[index].question)
-    //display choices
+  
     for(var choiceoption=0;choiceoption < quizQuestions[index].choices.length;choiceoption++){
      var btn = document.createElement("button");
      btn.textContent=(quizQuestions[index].choices[choiceoption]);
@@ -79,19 +102,23 @@ var index=0;
      btn.setAttribute("data-val",quizQuestions[index].choices[choiceoption]);
      document.querySelector("#choiceArea").appendChild(btn); 
      
-     //try adding event.target
-    //  else { timeElement--}
-    //   // 
-       
-    //     document.getElementById("question").textContent= (quizQuestions[1].question)
-     btn.addEventListener ("click", (quizQuestions [1]))
+     
+        
+     
+      
+
+     }
     // if  {(quizQuestions[index].answer === btn) displaycard (quizQuestions [index++].question);}
      
 
+
     }
-  }
   
-    
+  
+    //A. trivia game 
+//B.  add time
+//C. TODO: add local storage for high score and user to input initals
+
     //display ans
 // console.log (quizQuestions[index].answer)
 
@@ -104,9 +131,9 @@ var index=0;
 
 
   //when the user onclick the startbtn then we call the displaycard() to play the game
-  document.querySelector("#startButton").addEventListener ("click", (displaycard))
+  // startQuiz.addEventListener ("click", displaycard);
 
-//function needs to go through each questions one at a time
+//function needs to go through each questions one at a ti
 // with only correct answers advancing to the next questions,
 //also the timer needs to be counting down with more extra 5 
 //seconds taken off if question is answered wrong
