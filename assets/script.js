@@ -213,6 +213,7 @@ var index=0;
     document.getElementById("displayConent").style.display = "none";
 
     document.getElementById("gameOver").style.display = "block";
+    localStorage.setItem ("initals")
 
 
   }
