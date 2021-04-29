@@ -4,7 +4,8 @@ var secondsLeft = 50;
 var startQuiz = document.getElementById ("startButton");
 var submitAnswer = document.getElementById ("submitButton");
 var results = document.getElementById ("answer");
-
+var timerInterval;
+var clockRun=false;
 
 var index=0;
 
@@ -45,15 +46,12 @@ var index=0;
   startQuiz.addEventListener ("click",function () {
     event.preventDefault;
     displaycard ();
-    setTimer ()
+    startTime()
     
 
 
   });
-//display what needs to go when we start the game
-//display a startbtn
-//display instructions 
-//display  a title
+
   function start(){
   
     
@@ -65,26 +63,86 @@ var index=0;
 
     }
 
-    //startQuiz.addEventListener ("click");
+    
  
-  //https://www.w3schools.com/jsref/prop_style_display.asp
   
-//1. create your array of obj
-//2. create a displaycard() fx ..
-  //display the quest, choice
-  function setTimer () {
-    var timerInterval = setInterval(function () {
-      secondsLeft--;
-      timeElement.textContent = secondsLeft + " seconds left!";
+  
+  // function setTimer () {
+  //   var timerInterval = setInterval(function () {
+  //     secondsLeft--;
+  //     timeElement.textContent = secondsLeft + " seconds left!";
     
-      if (secondsLeft === 0) {
-         clearInterval (timerInterval);
-      //add final score info
+  //     if (secondsLeft === 0) {
+  //        clearInterval (timerInterval);
+  //        endGame ();
+  //     //add final score info
+  //     }
+    
+  //   }, 1000);
+    
+  
+  //     }
+
+
+      function startTime(){
+       
+
+        if (!clockRun) {
+          timerInterval = setInterval(function () {
+            //lose time do we have a fx for that
+            countDown ();
+           }, 1000); 
+           clockRun=true;
+          }
+
+
       }
+
+      function stopTime(){
+
+
+         clearInterval (timerInterval);
+         clockRun=false;
+         endGame ();
+      //add final score info
     
-    }, 1000);
     
-  
+
+      }
+
+      function countDown(){
+        console.log("counting down")
+        console.log(secondsLeft)
+    
+        if (secondsLeft <1) {
+         stopTime();
+       }else{
+
+       
+          secondsLeft--;
+          timeElement.textContent = secondsLeft + " seconds left!";
+          console.log("reduce time")
+       }
+
+
+      }
+
+      function loseTime(){
+        //lose time
+        secondsLeft-=10;
+        //check if you can continute
+        if (secondsLeft <1) {
+         stopTime();
+       }else{
+
+       
+       
+          timeElement.textContent = secondsLeft + " seconds left!";
+          console.log("reduce time")
+       }
+
+
+
       }
   
   function displaycard(){
@@ -93,33 +151,95 @@ var index=0;
     document.getElementById("highscoreContent").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
     document.getElementById("displayConent").style.display = "block";
-    document.getElementById("question").textContent= (quizQuestions[index].question);
+    //empty out the choice area b4 displaying a new btn
+    document.getElementById("choiceArea").textContent="";
+
+    //if we can go to the next index do the stuff below
+
+    //if not we need to show the high score page
+    //how do we know we are at the end.. check the quizQuestion.length
+    if(index<quizQuestions.length){
+      document.getElementById("question").textContent= (quizQuestions[index].question);
+
+
+  
   
     for(var choiceoption=0;choiceoption < quizQuestions[index].choices.length;choiceoption++){
      var btn = document.createElement("button");
      btn.textContent=(quizQuestions[index].choices[choiceoption]);
      btn.setAttribute("id","userOption");
      btn.setAttribute("data-val",quizQuestions[index].choices[choiceoption]);
+     btn.onclick=checkAns;
      document.querySelector("#choiceArea").appendChild(btn); 
-     
-     
-        
-     
+    }
+  }else{
+    //go to the highscore page
+    endGame ();
+  }
+    // // document.addEventListener ("click" , function (event) {if (event.target.matches (".answer")) {
+   
+
+
+    // // }
+    
+
+
       
 
-     }
-    // if  {(quizQuestions[index].answer === btn) displaycard (quizQuestions [index++].question);}
+  }
+
+  function checkAns(){
+     // if   (quizQuestions[index].answer === btn) displaycard (quizQuestions [index++].question);
+      // else (secondsLeft -- )
+     // when user onclick choice evaluate if ans ==choice
+    //right: next question displaycard()
+    //wrong: take time off the timer, move to next question displaycard()
+ 
+    //update the index
+    index++;
+    //call the next question
+    displaycard () 
+
+  }
+
+   function endGame() {
+    document.getElementById("displayConent").style.display = "none";
+
+    document.getElementById("gameOver").style.display = "block";
+    stopTime (); 
+  }
+
+  function highscore(){
+    document.getElementById("displayConent").style.display = "none";
+
+    document.getElementById("gameOver").style.display = "block";
+
+
+  }
+
+  //localstorage onsubmit btn to trigger localstorage
+
+
+
+
+  start();
+    
+      // if   (quizQuestions[index].answer === btn) displaycard (quizQuestions [index++].question);
+        
      
+    
+
+     
+    
 
 
-    }
+    
+  //TODO: highScore.textcontent " secondsLeft"
   
   
-    //A. trivia game 
-//B.  add time
 //C. TODO: add local storage for high score and user to input initals
+// TODO:  localStorage.setItem ("initals")
 
-    //display ans
 // console.log (quizQuestions[index].answer)
 
   
@@ -138,4 +258,3 @@ var index=0;
 
 
 
-start();
